@@ -1,0 +1,20 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2 class="active"> Sign In </h2>
+        <div *ngIf="loginForm.controls['email'].touched">
+            <div>
+                <div *ngIf="loginForm.controls['password'].hasError('required')" class="alert alert-danger">Password is required</div>
+                <div *ngIf="loginForm.controls['email'].hasError('required')" class="alert alert-danger">Email is required</div>
+            </div>
+        </div>
+        <!-- Login Form -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" method="POST">
+            <input type="text" class="fadeIn second" formControlName="email"  placeholder="Enter Your Email Address" autofocus required>
+
+            <input type="password" class="fadeIn third" formControlName="password" placeholder="password" required>
+
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+    </div>
+</div>
