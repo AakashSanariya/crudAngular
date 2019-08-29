@@ -12,10 +12,13 @@ export class ApiImageService {
   constructor(private http: HttpClient) { }
   
   baseUrl: string = 'http://api.imageupload.com/api';
-  
-  addImage(addPayload): Observable<AddImage[]>{
-    
-    let name = this.http.post<AddImage[]>(this.baseUrl + '/uploadimage', addPayload);
+
+  /* Add Image To Server*/
+  addImage(addPayload): Observable<AddImage>{
+    let formData = new FormData();
+    formData.append('name', addPayload.name);
+    formData.append('path', addPayload.path);
+    let name = this.http.post<AddImage>(this.baseUrl + '/uploadimage', formData);
     return name;
   }
 }

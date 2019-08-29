@@ -10,7 +10,7 @@ import {ApiImageService} from "../../service/api-image.service";
 })
 export class AddImageComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router ,private apiService: ApiImageService) {
-    // this.checkForm();
+    this.checkForm();
   }
 
   addImage: FormGroup;
@@ -18,37 +18,48 @@ export class AddImageComponent implements OnInit {
   /*Validation Form*/
   checkForm(){
     this.addImage = this.formBuilder.group({
-      name : ['', Validators.required],
-      path: ['', Validators.required]
+      name : ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      path: ['', Validators.required],
+      pathfile: ['', Validators.required]
     });
   }
 
+  /* For Select File And Replace it*/
   fileSelect(event){
     if(event.target.files.length > 0){
       this.path = event.target.files[0];
-     this.addImage.controls.path.setValue(this.path);
+     this.addImage.controls.pathfile.setValue(this.path);
     }
   }
-
+  isvalidateForm = false;
   /* On Submit Api Call*/
   onSubmit(){
+    this.isvalidateForm = false;
     if(this.addImage.invalid){
-      return true;
+      return;
     }
     const addPayload = {
       name: this.addImage.controls.name.value,
-      path: this.addImage.controls.path.value
+      path:this.addImage.controls.pathfile.value
     };
-    console.log(addPayload);
+    this.isvalidateForm = true;
     this.apiService.addImage(addPayload).subscribe(data => {
-      console.log(data);
+      if(data.meta['status_code'] === 422){
+        alert("Data Validation Error");
+      }
+      if(data.meta['status_code'] === 401){
+        alert("You don't have permission to add image");
+      }
+      if(data.meta['status_code'] === 200){
+        alert("Image Uploaded Successfully Please Check Your Email");
+        this.router.navigate(['/listimage']);
+      }
+      else{
+        alert("!Oops Some Error Occurs in Server");
+      }
     });
   }
   ngOnInit() {
-    this.addImage = this.formBuilder.group({
-      name : ['', Validators.required],
-      path: ['', Validators.required]
-    });
   }
 
 }

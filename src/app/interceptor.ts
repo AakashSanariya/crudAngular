@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse} from "@angular/common/http";
 import {Observable, throwError} from "rxjs/index";
 import {catchError} from "rxjs/internal/operators/catchError";
+import {Type} from "@angular-devkit/build-angular/src/browser/schema";
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,7 @@ export class Interceptor implements HttpInterceptor{
         if(token){
             request = request.clone({
                 setHeaders: {
-                    Authorization: 'Bearer' + ' ' + token
+                    Authorization: 'Bearer' + ' ' + token,
                 }
             });
             console.log(request);

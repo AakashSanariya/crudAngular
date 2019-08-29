@@ -3,10 +3,10 @@
         <!-- Tabs Titles -->
         <h2 class="active"> Sign In </h2>
         <div *ngIf="loginForm.controls['email'].touched">
-            <div>
-                <div *ngIf="loginForm.controls['password'].hasError('required')" class="alert alert-danger">Password is required</div>
-                <div *ngIf="loginForm.controls['email'].hasError('required')" class="alert alert-danger">Email is required</div>
-            </div>
+            <div *ngIf="loginForm.controls['password'].hasError('required')" class="alert alert-danger">Password is required</div>
+        </div>
+        <div *ngIf="loginForm.controls['password'].touched">
+            <div *ngIf="loginForm.controls['email'].hasError('required')" class="alert alert-danger">Email is required</div>
         </div>
         <!-- Login Form -->
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" method="POST">
