@@ -1,1 +1,21 @@
-<p>list-image works!</p>
+<div class="container table-responsive">
+    <table datatable class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Image Name</th>
+            <th>Image</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let image of images">
+            <td>{{ image.name }}</td>
+            <td><img src="{{ image.path }}" width="20px" height="20px"></td>
+            <td><button class="btn btn-warning" (click)="editImage(image)">Edit</button></td>
+            <td><button class="btn btn-danger" (click)="deleteImage(image)">Delete</button></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>

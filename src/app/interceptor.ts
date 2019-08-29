@@ -17,7 +17,6 @@ export class Interceptor implements HttpInterceptor{
                     Authorization: 'Bearer' + ' ' + token,
                 }
             });
-            console.log(request);
         }
         return next.handle(request).pipe(catchError((error: HttpErrorResponse) => {
             let errorMessage = '';
