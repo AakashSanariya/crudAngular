@@ -8,7 +8,7 @@ import { ListImageComponent } from './Image/list-image/list-image.component';
 import { AddImageComponent } from './Image/add-image/add-image.component';
 import { UpdateImageComponent } from './Image/update-image/update-image.component';
 import {DeleteImageComponent} from "./Image/delete-image/delete-image.component";
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {ApiImageService} from "./service/api-image.service";
 import {Interceptor} from "./interceptor";
@@ -31,7 +31,8 @@ import {DataTablesModule} from "angular-datatables/index";
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    DataTablesModule
+    DataTablesModule,
+    FormsModule,
   ],
   providers: [ ApiImageService, {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,

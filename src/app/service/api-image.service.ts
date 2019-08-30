@@ -29,10 +29,21 @@ export class ApiImageService {
     return image;
   }
 
-  /*Edit Image Detisl*/
+  /*Edit Image Details*/
   getImageById(Id):Observable<ListImage>{
     let getImageDetails = this.http.get<ListImage>(this.baseUrl + '/editimage/'+Id);
     return getImageDetails;
+  }
+
+  /*Update Image Details*/
+  updateImage(payLoad):Observable<ListImage>{
+    console.log(payLoad);
+    let formData = new FormData();
+    formData.append('name', payLoad.name);
+    formData.append('path', payLoad.path);
+    console.log(formData);
+    let update = this.http.post<ListImage>(this.baseUrl + '/updateimage/' + payLoad.id, formData);
+    return update;
   }
 
   /* Delete Image*/

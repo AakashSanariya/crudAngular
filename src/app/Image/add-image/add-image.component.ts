@@ -20,7 +20,6 @@ export class AddImageComponent implements OnInit {
     this.addImage = this.formBuilder.group({
       name : ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       path: ['', Validators.required],
-      pathfile: ['', Validators.required]
     });
   }
 
@@ -28,7 +27,7 @@ export class AddImageComponent implements OnInit {
   fileSelect(event){
     if(event.target.files.length > 0){
       this.path = event.target.files[0];
-     this.addImage.controls.pathfile.setValue(this.path);
+     this.addImage.controls.path.setValue(this.path);
     }
   }
   isvalidateForm = false;
@@ -40,7 +39,7 @@ export class AddImageComponent implements OnInit {
     }
     const addPayload = {
       name: this.addImage.controls.name.value,
-      path:this.addImage.controls.pathfile.value
+      path:this.addImage.controls.path.value
     };
     this.isvalidateForm = true;
     this.apiService.addImage(addPayload).subscribe(data => {

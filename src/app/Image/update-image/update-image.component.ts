@@ -1,8 +1,7 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {ApiImageService} from "../../service/api-image.service";
-import {Input} from "@angular/compiler/src/core";
 
 @Component({
   selector: 'app-update-image',
@@ -12,15 +11,26 @@ import {Input} from "@angular/compiler/src/core";
 export class UpdateImageComponent implements OnInit {
 
   constructor(private router: Router, private formBuilder: FormBuilder, private apiService: ApiImageService) {
-    // this.formCheck();
+    this.formCheck();
   }
-  editForm: FormGroup;
+  editImage: FormGroup;
+  ImageName: string;
+  ImagePath: string;
+  path: File = null;
   /* Form Validation*/
   formCheck(){
-    this.editForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      path: ['', Validators.required]
+    this.editImage = this.formBuilder.group({
+      name: ['', Validators.compose([Validators.minLength(3)])],
+      path: ['']
     });
+  }
+
+  /*For Image Select*/
+  fileSelect(event){
+    if(event.target.files.length > 0){
+      this.path = event.target.files[0];
+      this.editImage.controls.path.setValue(this.path);
+    }
   }
 
   ngOnInit() {
@@ -31,7 +41,26 @@ export class UpdateImageComponent implements OnInit {
     }
     
     this.apiService.getImageById(Id).subscribe(data => {
-      this.editForm.get('name').setValue(data.data['ImageData'].name);
+      this.editImage.controls.name.setValue(data.data['ImageData'].name);
+      this.editImage.controls.path.setValue(data.data['ImageData'].path);
+      this.ImageName = data.data['ImageData'].name;
+      this.ImagePath = data.data['ImageData'].path;
+    });
+  }
+
+  onSubmit(){
+    if(!localStorage.getItem('EditId')){
+      alert("Invalid Action Please Try Again.");
+      this.router.navigate(['/listimage']);
+    }
+    const payLoad = {
+      name: this.editImage.controls.name.value,
+      path: this.editImage.controls.path.value,
+      id : localStorage.getItem('EditId')
+    };
+    this.apiService.updateImage(payLoad).subscribe(data => {
+      alert("Image Update Successfully");
+      this.router.navigate(['/listimage']);
     });
   }
 
