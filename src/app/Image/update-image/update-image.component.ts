@@ -41,10 +41,10 @@ export class UpdateImageComponent implements OnInit {
     }
     
     this.apiService.getImageById(Id).subscribe(data => {
-      this.editImage.controls.name.setValue(data.data['ImageData'].name);
-      this.editImage.controls.path.setValue(data.data['ImageData'].path);
-      this.ImageName = data.data['ImageData'].name;
-      this.ImagePath = data.data['ImageData'].path;
+      this.editImage.controls.name.patchValue(data.data['ImageData'].name);
+      this.editImage.controls.path.patchValue(data.data['ImageData'].path);
+      // this.ImageName = data.data['ImageData'].name;
+      // this.ImagePath = data.data['ImageData'].path;
     });
   }
 
@@ -61,6 +61,7 @@ export class UpdateImageComponent implements OnInit {
       path: this.editImage.controls.path.value,
       id : localStorage.getItem('EditId')
     };
+    console.log(payLoad);
     this.apiService.updateImage(payLoad).subscribe(data => {
       alert("Image Update Successfully");
       this.router.navigate(['/listimage']);

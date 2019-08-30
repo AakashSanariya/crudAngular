@@ -15,6 +15,7 @@ export class AddImageComponent implements OnInit {
 
   addImage: FormGroup;
   path: File = null;
+  spinner = false;
   /*Validation Form*/
   checkForm(){
     this.addImage = this.formBuilder.group({
@@ -33,6 +34,7 @@ export class AddImageComponent implements OnInit {
   isvalidateForm = false;
   /* On Submit Api Call*/
   onSubmit(){
+    this.spinner = true;
     this.isvalidateForm = false;
     if(this.addImage.invalid){
       return;
@@ -43,6 +45,7 @@ export class AddImageComponent implements OnInit {
     };
     this.isvalidateForm = true;
     this.apiService.addImage(addPayload).subscribe(data => {
+      this.spinner = false;
       if(data.meta['status_code'] === 422){
         alert("Data Validation Error");
       }

@@ -1,4 +1,11 @@
-<div class="container  table table-responsive">
+<div *ngIf="spinner; loaded">
+    <div id="overlay">
+        <div class="spinner"></div>
+        <br/>
+        Loading...
+    </div>
+</div>
+<div class="container  table table-responsive" #loaded>
     <div class="table table-res">
     <table datatable class="table">
         <thead class="thead-dark">
@@ -13,7 +20,7 @@
 
         <tr *ngFor="let image of images">
             <td>{{ image.name }}</td>
-            <td><img [src]="'/home/akashsanariya/htdocs/ImageUploadApi/public/'+image.path" width="20px" height="20px">{{  image.path }}</td>
+            <td><!--<img [src]="'/home/akashsanariya/htdocs/ImageUploadApi/public/'+image.path" width="20px" height="20px">-->{{  image.path }}</td>
             <td><button class="btn btn-warning" (click)="editImage(image)">Edit</button></td>
             <td><button class="btn btn-danger" (click)="deleteImage(image)">Delete</button></td>
 

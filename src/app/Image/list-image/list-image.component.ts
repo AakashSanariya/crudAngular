@@ -10,13 +10,17 @@ import {Router} from "@angular/router";
 })
 export class ListImageComponent implements OnInit {
 
-  constructor(private apiService: ApiImageService, private router: Router) { }
+  constructor(private apiService: ApiImageService, private router: Router) {
+
+  }
   images: ListImage[];
+  spinner = true;
 
   /* For Listing Image Data*/
   ngOnInit() {
     this.apiService.getImageDetails().subscribe(data => {
       this.images = data.data['ImageData'];
+      this.spinner = false;
     });
   }
 
