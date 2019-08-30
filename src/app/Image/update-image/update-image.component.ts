@@ -49,6 +49,9 @@ export class UpdateImageComponent implements OnInit {
   }
 
   onSubmit(){
+    if(this.editImage.invalid){
+      return;
+    }
     if(!localStorage.getItem('EditId')){
       alert("Invalid Action Please Try Again.");
       this.router.navigate(['/listimage']);

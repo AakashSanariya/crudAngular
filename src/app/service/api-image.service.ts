@@ -37,11 +37,11 @@ export class ApiImageService {
 
   /*Update Image Details*/
   updateImage(payLoad):Observable<ListImage>{
-    console.log(payLoad);
+    // console.log(payLoad);
     let formData = new FormData();
     formData.append('name', payLoad.name);
     formData.append('path', payLoad.path);
-    console.log(formData);
+    // console.log(formData);
     let update = this.http.post<ListImage>(this.baseUrl + '/updateimage/' + payLoad.id, formData);
     return update;
   }
