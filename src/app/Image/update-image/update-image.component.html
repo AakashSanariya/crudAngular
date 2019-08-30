@@ -1,6 +1,6 @@
 <div id="AddImageForm" class="container">
     <h2>Update Image</h2>
-    <!--<div>
+    <div>
         <div *ngIf="editImage.controls['name'].touched">
             <div *ngIf="editImage.controls['name'].hasError('required')" class="alert alert-danger">Image Name is required</div>
             <div *ngIf="editImage.controls['name'].hasError('minlength')" class="alert alert-danger">Image Name must be greater than 3 Character</div>
@@ -8,7 +8,7 @@
         <div *ngIf="editImage.controls['path'].touched">
             <div *ngIf="editImage.controls['path'].hasError('required')" class="alert alert-danger">Please Select Image</div>
         </div>
-    </div>-->
+    </div>
     <form [(formGroup)]="editImage" method="POST" enctype="multipart/form-data" (ngSubmit)="onSubmit()">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Enter Name</label>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <div><input type="submit" value="Submit" class="btn btn-primary"></div>
+            <div><input type="submit" value="Submit" [disabled]="editImage.invalid" class="btn btn-primary"></div>
         </div>
     </form>
 </div>
