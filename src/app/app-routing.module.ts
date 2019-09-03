@@ -5,7 +5,6 @@ import {ListImageComponent} from "./Image/list-image/list-image.component";
 import {UpdateImageComponent} from "./Image/update-image/update-image.component";
 import {DeleteImageComponent} from "./Image/delete-image/delete-image.component";
 import {LoginComponent} from "./login/login.component";
-import {NavbarComponent} from "./navbar/navbar.component";
 import {AuthGuardGuard} from "./auth/auth-guard.guard";
 
 

@@ -7,7 +7,7 @@
 </div>
 <div class="container  table table-responsive" #loaded>
     <div class="table table-res">
-    <table datatable class="table">
+    <table datatable="" class="table">
         <thead class="thead-dark">
         <tr>
             <th>Image Name</th>
@@ -20,7 +20,8 @@
 
         <tr *ngFor="let image of images">
             <td>{{ image.name }}</td>
-            <td><!--<img [src]="'/home/akashsanariya/htdocs/ImageUploadApi/public/'+image.path" width="20px" height="20px">-->{{  image.path }}</td>
+            <!--<td><img [src]="'/home/akashsanariya/htdocs/ImageUploadApi/public/'+image.path" width="20px" height="20px">{{  image.path }}</td>-->
+            <td><img src="{{'http://192.168.10.184/ImageUploadApi/public/' +  image.path  }}" width="50px" height="50px" /></td>
             <td><button class="btn btn-warning" (click)="editImage(image)">Edit</button></td>
             <td><button class="btn btn-danger" (click)="deleteImage(image)">Delete</button></td>
 

@@ -1,29 +1,31 @@
 <div id="AddImageForm" class="container">
     <h2>Update Image</h2>
-    <div>
-        <div *ngIf="editImage.controls['name'].touched">
+    <!--<div>
+        <div *ngIf="name.touched">
             <div *ngIf="editImage.controls['name'].hasError('required')" class="alert alert-danger">Image Name is required</div>
             <div *ngIf="editImage.controls['name'].hasError('minlength')" class="alert alert-danger">Image Name must be greater than 3 Character</div>
         </div>
         <div *ngIf="editImage.controls['path'].touched">
             <div *ngIf="editImage.controls['path'].hasError('required')" class="alert alert-danger">Please Select Image</div>
         </div>
-    </div>
-    <form [(formGroup)]="editImage" method="POST" enctype="multipart/form-data" (ngSubmit)="onSubmit()">
+    </div>-->
+    <form #editImage="ngForm" method="POST" enctype="multipart/form-data" (ngSubmit)="onSubmit(editImage.value)">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Enter Name</label>
             <div class="col-sm-10">
-                <input type="text" value="{{ ImageName }}"  formControlName="name" class="form-control" placeholder="Enter Image Name" minlength="3"  required>
+                <h1>{{ editImage.name}}</h1>
+                <input type="text" name="name" [(ngModel)]="ImageDetails['name']" #name="ngModel"  class="form-control" placeholder="Enter Image Name" minlength="3"  required>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Select Image</label>
             <div class="col-sm-10">
-                <input type="file" class="form-control-file" formControlName="path" name="path" (change)="fileSelect($event)">
+                <img src="{{ 'http://192.168.10.184/ImageUploadApi/public/' +  ImageDetails['path'] }}" width="50px" height="50px"><br>
+                <input type="file" class="form-control-file" name="path"  [(ngModel)]="ImageDetails.path" (change)="fileSelect($event)">
             </div>
         </div>
         <div class="form-group row">
-            <div><input type="submit" value="Update" [disabled]="editImage.invalid" class="btn btn-primary"></div>
+            <div><input type="submit" value="Update" [disabled]="!editImage.form.valid"  class="btn btn-primary"></div>
         </div>
     </form>
 </div>

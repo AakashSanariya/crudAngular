@@ -48,9 +48,11 @@ export class AddImageComponent implements OnInit {
       this.spinner = false;
       if(data.meta['status_code'] === 422){
         alert("Data Validation Error");
+        this.spinner = false;
       }
       if(data.meta['status_code'] === 401){
         alert("You don't have permission to add image");
+        this.spinner = false;
       }
       if(data.meta['status_code'] === 200){
         alert("Image Uploaded Successfully Please Check Your Email");
@@ -58,6 +60,7 @@ export class AddImageComponent implements OnInit {
       }
       else{
         alert("!Oops Some Error Occurs in Server");
+        this.spinner = false;
       }
     });
   }

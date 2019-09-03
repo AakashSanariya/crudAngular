@@ -13,7 +13,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {ApiImageService} from "./service/api-image.service";
 import {Interceptor} from "./interceptor";
 import {NavbarComponent} from "./navbar/navbar.component";
-import {DataTablesModule} from "angular-datatables/index";
+import {DataTablesModule} from "angular-datatables";
 
 
 @NgModule({
@@ -31,8 +31,8 @@ import {DataTablesModule} from "angular-datatables/index";
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    DataTablesModule,
     FormsModule,
+    DataTablesModule,
   ],
   providers: [ ApiImageService, {provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,

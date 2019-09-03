@@ -2,14 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import {ApiImageService} from "../../service/api-image.service";
 import {ListImage} from "../../Model/list-image";
 import {Router} from "@angular/router";
-
+import * as $ from 'jquery';
+import "bootstrap/dist/css/bootstrap.css";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import 'datatables.net';
+import 'datatables.net-dt';
 @Component({
   selector: 'app-list-image',
   templateUrl: './list-image.component.html',
   styleUrls: ['./list-image.component.css']
 })
 export class ListImageComponent implements OnInit {
-
   constructor(private apiService: ApiImageService, private router: Router) {
 
   }

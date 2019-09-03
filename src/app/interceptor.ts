@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse} from "@angular/common/http";
 import {Observable, throwError} from "rxjs/index";
 import {catchError} from "rxjs/internal/operators/catchError";
-import {Type} from "@angular-devkit/build-angular/src/browser/schema";
+
 
 @Injectable({
     providedIn: 'root'
